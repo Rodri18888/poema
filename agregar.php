@@ -1,10 +1,11 @@
 <?php
-if (!empty($_POST["poema"])) {
+if (!empty($_POST["titulo"]) && !empty($_POST["poema"])) {
+    $titulo = trim($_POST["titulo"]);
     $poema = trim($_POST["poema"]);
-    $archivo = fopen("poemas.txt", "a");
-    fwrite($archivo, $poema . PHP_EOL);
-    fclose($archivo);
+    $linea = $titulo . "||" . $poema . PHP_EOL;
+    file_put_contents("poemas.txt", $linea, FILE_APPEND);
 }
 
 header("Location: index.php");
 exit;
+?>
